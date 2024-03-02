@@ -27,10 +27,8 @@ polygons = [
             scale=pixels_per_inch), 
     Polygon(chassis_polygon_three, chassis_color, gameDisplay,
             scale=pixels_per_inch), 
-    Polygon(chassis_polygon_four, chassis_color, gameDisplay,
-            scale=pixels_per_inch), 
     
-    Polygon(intake_polygon_one, active_intake_color, gameDisplay, # obviously, only show these later ones if they're... yk... actually in style
+    Polygon(intake_polygon_one, active_intake_color, gameDisplay,
             scale=pixels_per_inch), 
     Polygon(intake_polygon_two, active_intake_color, gameDisplay,
             scale=pixels_per_inch), 
@@ -42,12 +40,12 @@ polygons = [
     Polygon(outtake_polygon_three, outtake_color, gameDisplay, 
             scale=pixels_per_inch), 
     
-    Polygon(conveyor_polygon_one, active_conveyor_color, gameDisplay, # obviously, only show these later ones if they're... yk... actually in style
+    Polygon(conveyor_polygon_one, active_conveyor_color, gameDisplay,
             scale=pixels_per_inch), 
     Polygon(conveyor_polygon_two, active_conveyor_color, gameDisplay,
             scale=pixels_per_inch), 
     
-    Polygon(flywheel_polygon_one, active_flywheel_color, gameDisplay, # obviously, only show these later ones if they're... yk... actually in style
+    Polygon(flywheel_polygon_one, active_flywheel_color, gameDisplay,
             scale=pixels_per_inch), 
     Polygon(flywheel_polygon_two, active_flywheel_color, gameDisplay,
             scale=pixels_per_inch),
@@ -66,38 +64,38 @@ def draw_polygon_alpha(color, points):
 
 def drawPolygons(pos, current_angle, target_angle, intake_active, conveyor_active, flywheel_active, text_engine): # assuming angle is in degrees
     
-    for i in range(6):
+    for i in range(5):
         polygons[i].rotateTo(0)
         polygons[i].setPos(pos)
         polygons[i].update_hitbox()
 
-    for i in range(6, 13):
+    for i in range(5, 12):
         polygons[i].rotateTo(current_angle)
         polygons[i].setPos(polygons[0].pivotPoint)
         polygons[i].update_hitbox()
 
-    polygons[6].rotateTo(target_angle)
-    polygons[6].update_hitbox()
+    polygons[5].rotateTo(target_angle)
+    polygons[5].update_hitbox()
     
-    draw_polygon_alpha(outtake_target_color, polygons[6].hitbox)
+    draw_polygon_alpha(outtake_target_color, polygons[5].hitbox)
     
-    polygons[6].rotateTo(current_angle)
+    polygons[5].rotateTo(current_angle)
     polygons[i].update_hitbox()
     
     for i in range(len(polygons)):
-        if (i == 4 or i == 5):
+        if (i == 3 or i == 4):
             if intake_active:
                 draw_polygon_alpha(polygons[i].color, polygons[i].hitbox)
-        elif (i == 9 or i == 10):
+        elif (i == 8 or i == 9):
             if conveyor_active:
                 draw_polygon_alpha(polygons[i].color, polygons[i].hitbox)
-        elif (i == 11 or i == 12):
+        elif (i == 10 or i == 11):
             if flywheel_active:
                 draw_polygon_alpha(polygons[i].color, polygons[i].hitbox)
         else:
             polygons[i].draw()
             
-    text_engine.type("991", font, polygons[6].pivotPoint, 0.2, 0.2, white, 2, space_between_letters=8, angle=current_angle + text_angle)
+    text_engine.type("991", font, polygons[5].pivotPoint, 0.2, 0.2, white, 2, space_between_letters=8, angle=current_angle + text_angle)
 
 
 def mouse_pos_to_inches(mousePos):
@@ -168,9 +166,9 @@ while run:
         (selector_width + (display_width - selector_width - 38 * pixels_per_inch) * 0.5, display_height * 0.1),
         current_angle, 
         target_angle, 
-        intake_state != "inactive", 
-        conveyor_state != "inactive", 
-        flywheel_stake != "inactive", 
+        intake_state != "off", 
+        conveyor_state != "off", 
+        flywheel_stake != "off", 
         TE
     )
 
@@ -226,7 +224,7 @@ while run:
             0.4, black, 2, space_between_letters=6)
     
     smartDashboard.putNumberArray("Auto Data", indices)
-    print(indices)
+    # print(indices)
 
     pygame.display.update()
     clock.tick(10)
