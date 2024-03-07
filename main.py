@@ -143,7 +143,7 @@ while run:
     pygame.draw.rect(gameDisplay, green, (selector_width, int(
         display_height * 0.9), display_width, display_height))
     
-    current_angle = smartDashboard.getNumber("Current Angle", 991)
+    current_angle = smartDashboard.getNumber("Current Pivot Angle", 991)
     
     if current_angle == 991:
         if pygame.mouse.get_pos()[0] > selector_width:
@@ -156,19 +156,19 @@ while run:
         else:
             current_angle = 59.006106
     
-    target_angle = smartDashboard.getNumber("Target 1st Angle", -9.751102)
+    target_angle = smartDashboard.getNumber("Target Pivot Angle", -9.751102)
     
-    intake_state = smartDashboard.getString("intake state", "disconnected")
-    conveyor_state = smartDashboard.getString("conveyor state", "disconnected")
-    flywheel_stake = smartDashboard.getString("flywheel state", "disconnected")
+    intake_state = smartDashboard.getString("Intake State", "disconnected")
+    conveyor_state = smartDashboard.getString("Conveyor State", "disconnected")
+    flywheel_stake = smartDashboard.getString("Flywheel State", "disconnected")
     
     drawPolygons(
         (selector_width + (display_width - selector_width - 38 * pixels_per_inch) * 0.5, display_height * 0.1),
         current_angle, 
         target_angle, 
-        intake_state != "off", 
-        conveyor_state != "off", 
-        flywheel_stake != "off", 
+        intake_state != "Off", 
+        conveyor_state != "Off", 
+        flywheel_stake != "Off", 
         TE
     )
 
