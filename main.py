@@ -141,7 +141,7 @@ while run:
     # double arm
     
     pygame.draw.rect(gameDisplay, green, (selector_width, int(
-        display_height * 0.9), display_width, display_height))
+        display_height * 0.95), display_width, display_height))
     
     current_angle = smartDashboard.getNumber("Current Pivot Angle", 991)
     
@@ -163,7 +163,7 @@ while run:
     flywheel_stake = smartDashboard.getString("Flywheel State", "disconnected")
     
     drawPolygons(
-        (selector_width + (display_width - selector_width - 38 * pixels_per_inch) * 0.5, display_height * 0.1),
+        (selector_width + (display_width - selector_width - 38 * pixels_per_inch) * 0.5, display_height * 0.05),
         current_angle, 
         target_angle, 
         intake_state != "Off", 
@@ -218,13 +218,15 @@ while run:
                         [j].pivotPoint[0], auto_chooser_grid[i][j].pivotPoint[1] - 12.5), 
                         0.25, 0.25, black, 2, space_between_letters=6)
 
-    TE.type("team 991", font, (277, 453), 1.2, 1.2,
+    TE.type("team 991", font, (277, 390), 1.2, 1.2,
             black, 6, space_between_letters=12)
-    TE.type("knew it was treble", font, (520, 406), 0.4,
+    TE.type("knew it was treble", font, (520, 343), 0.4,
             0.4, black, 2, space_between_letters=6)
     
-    smartDashboard.putNumberArray("Auto Data", indices)
-    # print(indices)
+    smartDashboard.putString("Auto Selector String", 
+        ["Amp", "Middle", "NotAmp"][indices[1]] + 
+        ["", "", "Double", "Triple"][indices[2]]
+    )
 
     pygame.display.update()
     clock.tick(10)
