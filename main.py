@@ -225,7 +225,7 @@ while run:
     
     smartDashboard.putString("Auto Selector String", 
         ["Amp", "Middle", "NotAmp"][indices[1]] + 
-        ["", "", "Double", "Triple"][indices[2]]
+        ["Single", "Double", "Triple", "Quadruple"][indices[2]]
     )
 
     pygame.display.update()
