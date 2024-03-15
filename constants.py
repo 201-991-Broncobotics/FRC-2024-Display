@@ -1,5 +1,5 @@
 display_width = 1440
-display_height = 530
+display_height = 531
 
 selector_width = 720
 selector_height = 340
