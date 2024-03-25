@@ -119,7 +119,13 @@ for i in auto_chooser_grid:
 mousedownlast = False
 mouseclicked = False
 
-indices = [0, 0, 0]
+indices = [0, 0]
+
+auto_names = [
+    ["F1 F2", "F1 F2 F3", "F1 F3","F2 F3"], # amp
+    ["C2 C3 C1", "C3 C2 F1 C1", "C3 C2 F2", "C3 C2 F2 C1"], # center
+    ["F3 F2 F1", "F3 F1 F2", "F5 F3", "F5 F4"], # not amp
+]
 
 run = True
 
@@ -178,6 +184,17 @@ while run:
         
         TE.type("target angle is " + str(round(target_angle, 1)), font, (selector_width + int((display_width - selector_width) * 0.5), int(
             display_height * 4.0 / 5.0)), 0.01 * display_height / 16.0, 0.01 * display_height / 16.0, black, 2, space_between_letters=display_height / 96.0)
+        
+        teleop_time_left = smartDashboard.getNumber("TeleOp Time Left", 200)
+        if teleop_time_left < 150:
+            if teleop_time_left < 0:
+                teleop_time_left = 0
+            mins_left = int(teleop_time_left / 60)
+            seconds_left = round(teleop_time_left - mins_left * 60)
+            
+            TE.type(str(mins_left) + ":" + ("0" if seconds_left < 10 else "") + str(seconds_left) + " left in Teleop", font, (selector_width + int((display_width - selector_width) * 0.05), int(
+                display_height * 7.0 / 8.0)), 0.01 * display_height / 16.0, 0.01 * display_height / 16.0, black, 2, space_between_letters=display_height / 96.0)
+
 
     else:  # no reading from smartdashboard
         TE.type("could not connect to robot", font, (selector_width + int((display_width - selector_width) * 0.5), int(
@@ -202,11 +219,13 @@ while run:
                 title_x = first_title_x
             if i == 2:
                 title_x = second_title_x
-            if i == 3:
-                title_x = third_title_x
             TE.type(categories[i - 1], font, (title_x, title_height), 0.25, 0.25, white, 2, space_between_letters=6)
-            
+        
         for j in range(len(auto_chooser_grid[i])):
+            og_name = auto_chooser_grid[i][j].name
+            if i == 2:
+                auto_chooser_grid[i][j].name = auto_names[indices[0]][j]
+                
             temp = auto_chooser_grid[i][j].color
             if (i != 0 and indices[i - 1] != j):
                 auto_chooser_grid[i][j].color = gray
@@ -217,16 +236,19 @@ while run:
                 TE.type(auto_chooser_grid[i][j].name, font, (auto_chooser_grid[i]
                         [j].pivotPoint[0], auto_chooser_grid[i][j].pivotPoint[1] - 12.5), 
                         0.25, 0.25, black, 2, space_between_letters=6)
+            auto_chooser_grid[i][j].name = og_name
 
-    TE.type("team 991", font, (277, 390), 1.2, 1.2,
+    TE.type("Team 991", font, (277, 390), 1.2, 1.2,
             black, 6, space_between_letters=12)
-    TE.type("knew it was treble", font, (520, 343), 0.4,
+    TE.type("knew it was Treble", font, (520, 343), 0.4,
             0.4, black, 2, space_between_letters=6)
     
     smartDashboard.putString("Auto Selector String", 
-        ["Amp", "Middle", "NotAmp"][indices[1]] + 
-        ["Single", "Double", "Triple", "Quadruple"][indices[2]]
+        ["Amp", "Center", "Not Amp"][indices[0]] + " " + 
+        auto_names[indices[0]][indices[1]]
     )
+    
+    print(["Amp", "Center", "Not Amp"][indices[0]] + " " + auto_names[indices[0]][indices[1]])
 
     pygame.display.update()
     clock.tick(10)

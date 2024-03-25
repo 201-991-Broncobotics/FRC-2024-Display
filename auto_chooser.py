@@ -5,22 +5,21 @@ from pygame import Surface
 
 ''' Categories: 
 
-station: red, blue (2)
 place: amp, middle, notamp
-number: 1, 2, 3, 4
+Four paths: path name varies
 
--> 4 total columns
+-> 3 total columns, in ratio 1 : 1.5 : 1.5
 '''
 
-button_width = (selector_width - 2 * main_border - 3 * internal_border) / 4.0
+single_width = (selector_width - 2 * main_border - 2 * internal_border) / 4.0
+one_point_five_width = (selector_width - 2 * main_border - 2 * internal_border) * 3.0 / 8.0
 double_height = (selector_height - main_border - top_border - internal_border) / 2.0
 triple_height = (selector_height - main_border - top_border - 2 * internal_border) / 3.0
 
 title_height = (selector_height - top_border / 2.0) - 12.5
 
-first_title_x = main_border + button_width / 2.0
-second_title_x = main_border + internal_border + button_width * 3.0 / 2.0
-third_title_x = main_border + internal_border * 5.0 / 2.0 + button_width * 3.0
+first_title_x = main_border + single_width / 2.0
+second_title_x = main_border + internal_border * 3.0 / 2.0 + single_width + one_point_five_width
 
 def getAutoChooserGrid(gameDisplay: Surface):
     return [[
@@ -34,95 +33,74 @@ def getAutoChooserGrid(gameDisplay: Surface):
         )
     ], [
         Polygon(
-            [[main_border, main_border + internal_border + double_height], 
-             [main_border + button_width, main_border + internal_border + double_height], 
-             [main_border + button_width, main_border + internal_border + double_height * 2], 
-             [main_border, main_border + internal_border + double_height * 2]],
-            blue,
-            gameDisplay,
-            pivot=(main_border + button_width / 2.0, main_border + internal_border + double_height * 3.0 / 2.0), 
-            name="blue"
-        ), 
-        Polygon(
-            [[main_border, main_border], 
-             [main_border + button_width, main_border], 
-             [main_border + button_width, main_border + double_height], 
-             [main_border, main_border + double_height]],
-            red,
-            gameDisplay, 
-            pivot=(main_border + button_width / 2.0, main_border + double_height / 2.0), 
-            name="red"
-        )
-    ], [
-        Polygon(
-            [[main_border + internal_border + button_width, main_border + internal_border * 2 + triple_height * 2], 
-             [main_border + internal_border + button_width * 2, main_border + internal_border * 2 + triple_height * 2], 
-             [main_border + internal_border + button_width * 2, main_border + internal_border * 2 + triple_height * 3], 
-             [main_border + internal_border + button_width, main_border + internal_border * 2 + triple_height * 3]],
+            [[main_border, main_border + internal_border * 2 + triple_height * 2], 
+             [main_border + single_width, main_border + internal_border * 2 + triple_height * 2], 
+             [main_border + single_width, main_border + internal_border * 2 + triple_height * 3], 
+             [main_border, main_border + internal_border * 2 + triple_height * 3]],
             orange,
             gameDisplay,
-            pivot=(main_border + internal_border + button_width + button_width / 2.0, main_border + internal_border * 2 + triple_height * 5.0 / 2.0), 
+            pivot=(main_border + single_width / 2.0, main_border + internal_border * 2 + triple_height * 5.0 / 2.0), 
             name="amp"
         ), 
         Polygon(
-            [[main_border + internal_border + button_width, main_border + internal_border + triple_height], 
-             [main_border + internal_border + button_width * 2, main_border + internal_border + triple_height], 
-             [main_border + internal_border + button_width * 2, main_border + internal_border + triple_height * 2], 
-             [main_border + internal_border + button_width, main_border + internal_border + triple_height * 2]],
+            [[main_border, main_border + internal_border + triple_height], 
+             [main_border + single_width, main_border + internal_border + triple_height], 
+             [main_border + single_width, main_border + internal_border + triple_height * 2], 
+             [main_border, main_border + internal_border + triple_height * 2]],
             green,
-            gameDisplay, 
-            pivot=(main_border + internal_border + button_width + button_width / 2.0, main_border + internal_border + triple_height * 3.0 / 2.0), 
-            name="middle"
+            gameDisplay,
+            pivot=(main_border + single_width / 2.0, main_border + internal_border + triple_height * 3.0 / 2.0), 
+            name="center"
         ), 
         Polygon(
-            [[main_border + internal_border + button_width, main_border], 
-             [main_border + internal_border + button_width * 2, main_border], 
-             [main_border + internal_border + button_width * 2, main_border + triple_height], 
-             [main_border + internal_border + button_width, main_border + triple_height]],
+            [[main_border, main_border], 
+             [main_border + single_width, main_border], 
+             [main_border + single_width, main_border + triple_height], 
+             [main_border, main_border + triple_height]],
             yellow,
             gameDisplay,
-            pivot=(main_border + internal_border + button_width + button_width / 2.0, main_border + triple_height / 2.0), 
+            pivot=(main_border + single_width / 2.0, main_border + triple_height / 2.0), 
             name="not amp"
         )
     ], [
         Polygon(
-            [[main_border + internal_border * 2 + button_width * 2, main_border + internal_border + double_height], 
-             [main_border + internal_border * 2 + button_width * 3, main_border + internal_border + double_height], 
-             [main_border + internal_border * 2 + button_width * 3, main_border + internal_border + double_height * 2], 
-             [main_border + internal_border * 2 + button_width * 2, main_border + internal_border + double_height * 2]],
+            [[main_border + internal_border + single_width, main_border + internal_border + double_height], 
+             [main_border + internal_border + single_width + one_point_five_width, main_border + internal_border + double_height], 
+             [main_border + internal_border + single_width + one_point_five_width, main_border + internal_border + double_height * 2], 
+             [main_border + internal_border + single_width, main_border + internal_border + double_height * 2]],
             purple,
             gameDisplay,
-            pivot=(main_border + internal_border * 2 + button_width * 2 + button_width / 2.0, main_border + internal_border + double_height * 3.0 / 2.0), 
+            pivot=(main_border + internal_border + single_width + one_point_five_width * 0.5, main_border + internal_border + double_height * 3.0 / 2.0), 
             name="one"
         ),
         Polygon(
-            [[main_border + internal_border * 2 + button_width * 2, main_border], 
-             [main_border + internal_border * 2 + button_width * 3, main_border], 
-             [main_border + internal_border * 2 + button_width * 3, main_border + double_height], 
-             [main_border + internal_border * 2 + button_width * 2, main_border + double_height]],
+            [[main_border + internal_border + single_width, main_border], 
+             [main_border + internal_border + single_width + one_point_five_width, main_border], 
+             [main_border + internal_border + single_width + one_point_five_width, main_border + double_height], 
+             [main_border + internal_border + single_width, main_border + double_height]],
             purple,
-            gameDisplay, 
-            pivot=(main_border + internal_border * 2 + button_width * 2 + button_width / 2.0, main_border + double_height / 2.0), 
+            gameDisplay,
+            pivot=(main_border + internal_border + single_width + one_point_five_width * 0.5, main_border + double_height / 2.0), 
             name="two"
         ),
         Polygon(
-            [[main_border + internal_border * 3 + button_width * 3, main_border + internal_border + double_height], 
-             [main_border + internal_border * 3 + button_width * 4, main_border + internal_border + double_height], 
-             [main_border + internal_border * 3 + button_width * 4, main_border + internal_border + double_height * 2], 
-             [main_border + internal_border * 3 + button_width * 3, main_border + internal_border + double_height * 2]],
+            [[main_border + internal_border * 2 + single_width + one_point_five_width, main_border + internal_border + double_height], 
+             [main_border + internal_border * 2 + single_width + one_point_five_width * 2, main_border + internal_border + double_height], 
+             [main_border + internal_border * 2 + single_width + one_point_five_width * 2, main_border + internal_border + double_height * 2], 
+             [main_border + internal_border * 2 + single_width + one_point_five_width, main_border + internal_border + double_height * 2]],
             purple,
             gameDisplay,
-            pivot=(main_border + internal_border * 3 + button_width * 3 + button_width / 2.0, main_border + internal_border + double_height * 3.0 / 2.0), 
+            pivot=(main_border + internal_border * 2 + single_width + one_point_five_width * 1.5, main_border + internal_border + double_height * 3.0 / 2.0), 
             name="three"
         ), 
         Polygon(
-            [[main_border + internal_border * 3 + button_width * 3, main_border], 
-             [main_border + internal_border * 3 + button_width * 4, main_border], 
-             [main_border + internal_border * 3 + button_width * 4, main_border + double_height], 
-             [main_border + internal_border * 3 + button_width * 3, main_border + double_height]],
+            [[main_border + internal_border * 2 + single_width + one_point_five_width, main_border], 
+             [main_border + internal_border * 2 + single_width + one_point_five_width * 2, main_border], 
+             [main_border + internal_border * 2 + single_width + one_point_five_width * 2, main_border + double_height], 
+             [main_border + internal_border * 2 + single_width + one_point_five_width, main_border + double_height]],
             purple,
-            gameDisplay, 
-            pivot=(main_border + internal_border * 3 + button_width * 3 + button_width / 2.0, main_border + double_height / 2.0), 
+            gameDisplay,
+            pivot=(main_border + internal_border * 2 + single_width + one_point_five_width * 1.5, main_border + double_height / 2.0), 
             name="four"
         )
     ]]

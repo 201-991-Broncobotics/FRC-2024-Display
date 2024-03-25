@@ -13,7 +13,7 @@ pixels_per_inch = (display_width - selector_width) * 0.018
 
 robot_ip = "10.9.91.2"
 
-categories = ["station", "place",  "number of notes"]
+categories = ["place",  "path name"]
 
 chassis_polygon_one: list[tuple[float, float]] = [  # in inches
     (0, 4), 
