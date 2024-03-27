@@ -124,7 +124,7 @@ indices = [0, 0]
 auto_names = [
     ["F1 F2", "F1 F2 F3", "F1 F3","F2 F3"], # amp
     ["C2 C3 C1", "C3 C2 F1 C1", "C3 C2 F2", "C3 C2 F2 C1"], # center
-    ["F3 F2 F1", "F3 F1 F2", "F5 F3", "F5 F4"], # not amp
+    ["F3 F2 F1", "F3 F1 F2", "F5 F4 F3", "F5 F4"], # not amp
 ]
 
 run = True
