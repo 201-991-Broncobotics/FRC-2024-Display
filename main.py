@@ -122,9 +122,9 @@ mouseclicked = False
 indices = [0, 0]
 
 auto_names = [
-    ["F1 F2", "F1 F2 F3", "F1 F3","F2 F3"], # amp
-    ["C2 C3 C1", "C3 C2 F1 C1", "C3 C2 F2", "C3 C2 F2 C1"], # center
-    ["F3 F2 F1", "F3 F1 F2", "F5 F4 F3", "F5 F4"], # not amp
+    ["na", "na", "na", "na"], # amp
+    ["C2 C3 C1", "na", "na", "na"], # center
+    ["F5 F4", "F4 F5", "na", "na"], # not amp
 ]
 
 run = True
@@ -208,7 +208,14 @@ while run:
             if (mouseclicked):
                 if ((auto_chooser_grid[i][j].hitbox[0][0] < pygame.mouse.get_pos()[0]) == (pygame.mouse.get_pos()[0] < auto_chooser_grid[i][j].hitbox[2][0])):
                     if ((auto_chooser_grid[i][j].hitbox[0][1] < pygame.mouse.get_pos()[1]) == (pygame.mouse.get_pos()[1] < auto_chooser_grid[i][j].hitbox[2][1])):
+                        pindices = indices[i - 1]
                         indices[i - 1] = j
+                        if i == 2:
+                            if auto_names[indices[0]][indices[1]] == "na":
+                                indices[1] = pindices
+
+    if auto_names[indices[0]][indices[1]] == "na":
+        indices[1] = 0
     
     # no overrides yet :)
 
@@ -248,7 +255,7 @@ while run:
         auto_names[indices[0]][indices[1]]
     )
     
-    print(["Amp", "Center", "Not Amp"][indices[0]] + " " + auto_names[indices[0]][indices[1]])
+    # print(["Amp", "Center", "Not Amp"][indices[0]] + " " + auto_names[indices[0]][indices[1]])
 
     pygame.display.update()
     clock.tick(10)
